@@ -1,0 +1,16 @@
+python -m venv venv
+venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+python app.py
+
+python scripts/merge_and_remap.py
+yolo detect train data=datasets/data.yaml model=yolov8n.pt epochs=50 imgsz=640
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+yolo detect train data=datasets/data.yaml model=yolov8n.pt epochs=10 imgsz=416 batch=8
+
+
+yolo detect train data=datasets/medicine_expiry/data.yaml model=yolov8n.pt epochs=10 imgsz=640
+
+pip install Flask-Cors
